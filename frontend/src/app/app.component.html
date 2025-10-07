@@ -1,0 +1,16 @@
+<app-app-form
+  [config]="formConfig"
+  (formChange)="onFormChange($event)"
+></app-app-form>
+
+<ng-container>
+  @if(!ready || !chartOptions) {
+    <mat-spinner></mat-spinner>
+  }
+  @if(ready && chartOptions) {
+    <highcharts-chart
+      [options]="chartOptions"
+      style="width: 400px; height: 400px; display: block;"
+    ></highcharts-chart>
+  }
+</ng-container>

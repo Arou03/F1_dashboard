@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  @for (field of config; track field.name) {
+    <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 16px;">
+      <mat-label>{{ field.label }}</mat-label>
+
+      @if (field.type === 'input') {
+        <input
+          matInput
+          [placeholder]="field.placeholder || ''"
+          [formControlName]="field.name"
+        />
+      } @else if (field.type === 'select') {
+        <mat-select
+          [formControlName]="field.name"
+          [placeholder]="field.placeholder || ''"
+        >
+          @for (option of field.options; track option.value) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          } @empty {
+            <mat-option disabled>No options</mat-option>
+          }
+        </mat-select>
+      }
+    </mat-form-field>
+  } @empty {
+    <p>No fields to display.</p>
+  }
+</form>
